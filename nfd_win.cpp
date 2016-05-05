@@ -16,8 +16,18 @@
 #include <atlbase.h>
 #include <windows.h>
 #include <ShObjIdl.h>
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+#include <SFML/OpenGL.hpp>
+#include <iostream>
+#include <string>
 
 #include "nfd_common.h"
+
+using namespace std;
+
+sf::SoundBuffer record;
+sf::Sound sound;
 
 
 // allocs the space in outPath -- call free()
@@ -403,6 +413,7 @@ nfdresult_t NFD_OpenDialog( const char *filterList,
             NFDi_SetError("Could not get shell item from dialog.");
             goto end;
         }
+		
         wchar_t *filePath(NULL);
         result = shellItem->GetDisplayName(::SIGDN_FILESYSPATH, &filePath);
         if ( !SUCCEEDED(result) )
@@ -410,9 +421,15 @@ nfdresult_t NFD_OpenDialog( const char *filterList,
             NFDi_SetError("Could not get file path for selected.");
             goto end;
         }
-
-        CopyWCharToNFDChar( filePath, outPath );
+		CopyWCharToNFDChar( filePath, outPath );
         CoTaskMemFree(filePath);
+		/*cout << *outPath;
+		string lel = *outPath;
+		cout << lel;
+		record.loadFromFile(lel);
+						sound.setBuffer(record);
+						sound.play();*/
+		
         if ( !*outPath )
         {
             /* error is malloc-based, error message would be redundant */
