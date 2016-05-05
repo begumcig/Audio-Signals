@@ -17,7 +17,7 @@ int main()
 	cout << "Software by Elif Begum Cig" << endl << "For any questions email bcig@sabanciuniv.edu." << endl
 		<< "Any recorded file is automaticly saved." << endl << "Recordings are made at 16 bits but you can convert it to 8 bits." << endl;
 
-	sf::RenderWindow window(sf::VideoMode(1340, 390), "Recorder"); 
+	sf::RenderWindow window(sf::VideoMode(1340, 390), "Recorder", sf::Style::Close); 
 	window.setKeyRepeatEnabled(false);
 	window.setFramerateLimit(60);
 
